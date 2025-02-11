@@ -1,10 +1,13 @@
 # api/db/schemas.py
 from enum import Enum
 from typing import OrderedDict
+
 from pydantic import BaseModel
+
 
 class Genre(str, Enum):
     """Book genres."""
+
     SCI_FI = "Science Fiction"
     FANTASY = "Fantasy"
     HORROR = "Horror"
@@ -12,16 +15,20 @@ class Genre(str, Enum):
     ROMANCE = "Romance"
     THRILLER = "Thriller"
 
+
 class Book(BaseModel):
     """Book schema
+
     Args:
         BaseModel (BaseModel): Pydantic base model.
     """
+
     id: int
     title: str
     author: str
     publication_year: int
     genre: Genre
+
 
 class InMemoryDB:
     def __init__(self):
@@ -29,6 +36,7 @@ class InMemoryDB:
 
     def get_books(self) -> OrderedDict[int, Book]:
         """Gets books from database.
+
         Returns:
             OrderedDict[int, Book]: Ordered dictionary of books.
         """
@@ -36,8 +44,10 @@ class InMemoryDB:
 
     def add_book(self, book: Book) -> Book:
         """Adds book to database.
+
         Args:
             book (Book): Book to add.
+
         Returns:
             Book: Added book.
         """
@@ -45,8 +55,10 @@ class InMemoryDB:
 
     def get_book(self, book_id: int) -> Book:
         """Gets a specific book from database.
+
         Args:
             book_id (int): Book ID.
+
         Returns:
             Book: Book.
         """
@@ -54,9 +66,11 @@ class InMemoryDB:
 
     def update_book(self, book_id: int, data: Book) -> Book:
         """Updates a specific book in database.
+
         Args:
             book_id (int): Book ID.
             data (Book): Book data.
+
         Returns:
             Book: Updated book.
         """
@@ -65,6 +79,7 @@ class InMemoryDB:
 
     def delete_book(self, book_id: int) -> None:
         """Deletes a specific book from database.
+
         Args:
             book_id (int): Book ID.
         """

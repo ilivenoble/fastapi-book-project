@@ -57,7 +57,7 @@ async def delete_book(book_id: int) -> None:
     return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content=None)
 
 # Add the new endpoint here
-@router.get("/api/v1/books/{book_id}", response_model=Book, status_code=status.HTTP_200_OK)
+@router.get("/{book_id}", response_model=Book, status_code=status.HTTP_200_OK)
 async def get_book(book_id: int):
     """Retrieve a book by its ID."""
     book = db.get_book(book_id)
