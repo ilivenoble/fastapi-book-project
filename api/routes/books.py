@@ -61,6 +61,6 @@ async def delete_book(book_id: int) -> None:
 async def get_book(book_id: int):
     """Retrieve a book by its ID."""
     book = db.get_book(book_id)
-    if book is None:
-        raise HTTPException(status_code=404, detail="Book not found")
+    if book == None:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"detail": "Book not found"})
     return book
