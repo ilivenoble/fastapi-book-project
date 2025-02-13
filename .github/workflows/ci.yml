@@ -7,28 +7,24 @@ on:
 
 jobs:
   test:
-    name: Test
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
+          cache: "pip"
 
-      - name: upgrade pip
+      - name: Upgrade pip
         run: python -m pip install --upgrade pip
 
-      - name: virtualenv
+      - name: Virtual Environment
         run: python -m venv venv
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: source venv/bin/activate && pip install -r requirements.txt
 
-      - name: Run tests
-        run: |
-          source venv/bin/activate
-          pytest
+      - name: Run Test
+        run: source venv/bin/activate && pytest
