@@ -4,16 +4,9 @@ on:
   push:
     branches:
       - main
-# on:
-#   pull_request:
-#     types:
-#       - closed
-#     branches:
-#       - main
 
 jobs:
   deploy:
-    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Application
@@ -36,3 +29,7 @@ jobs:
             sudo service fastapi restart
             sudo service nginx restart
           EOF
+
+      - name: Health Check
+        run: |
+          curl -f http://${{ secrets.HOST_NAME }}/stage2 || exit 1
