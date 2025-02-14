@@ -64,8 +64,4 @@ async def get_book(book_id: int):
     if book == None:
         return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"detail": "Book not found"})
     return book
-
-@router.get("/healthcheck")
-async def health_check():
-    """Checks if server is active."""
-    return {"status": "active"}
+    
